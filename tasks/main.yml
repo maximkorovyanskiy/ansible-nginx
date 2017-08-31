@@ -3,6 +3,8 @@
     tags:
      - nginx
      - nginx-install
+     - nginx-config
 
   - include: "repo-{{ ansible_os_family | lower }}.yml"
   - include: "install.yml"
+  - include: "config.yml"

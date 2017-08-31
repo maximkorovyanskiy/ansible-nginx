@@ -4,3 +4,62 @@ nginx_version: 'mainline'
 nginx_packages_state: present
 nginx_packages:
   - nginx
+
+nginx_user: nginx
+nginx_worker_processes: auto
+nginx_config_dir: '/etc/nginx'
+nginx_log_dir: '/var/log/nginx'
+nginx_error_log: 'error.log'
+nginx_access_log: 'access.log'
+nginx_access_log_format: 'main'
+nginx_error_log_level: 'warn'
+nginx_worker_connections: 1024
+nginx_pid: '/var/run/nginx.pid'
+
+nginx_sendfile: 'on'
+nginx_tcp_nopush: 'on'
+nginx_lingering_time: 30
+nginx_lingering_timeout: 5
+nginx_client_header_timeout: 60
+nginx_client_body_timeout: 60
+nginx_send_timeout: 30
+nginx_keepalive_timeout: '15 10'
+nginx_reset_timedout_connection: 'on'
+nginx_server_tokens: 'off'
+
+nginx_common_params:
+ - sendfile                    on;
+ - tcp_nopush                  on;
+ - lingering_time              30;
+ - lingering_timeout           5;
+ - client_header_timeout       60;
+ - client_body_timeout         60;
+ - send_timeout                30;
+ - keepalive_timeout           15 10;
+ - reset_timedout_connection   on;
+ - server_tokens               off;
+ - charset                     utf-8;
+ - charset_types               "*";
+ - client_header_buffer_size   4k;
+ - client_max_body_size        64m;
+ - client_body_buffer_size     256k;
+ - large_client_header_buffers 8 16k;
+ - proxy_http_version          1.1;
+ - fastcgi_read_timeout        90;
+ - fastcgi_send_timeout        90;
+ - fastcgi_connect_timeout     2;
+ - fastcgi_buffers             256 16k;
+ - fastcgi_buffer_size         32k;
+ - fastcgi_intercept_errors    on;
+ - fastcgi_hide_header         "X-Powered-By";
+ - fastcgi_next_upstream       error timeout invalid_header http_500 http_503;
+
+nginx_gzip_params:
+ - gzip_static                 on;
+ - gzip                        on;
+ - gzip_vary                   on;
+ - gzip_comp_level             7;
+ - gzip_proxied                any;
+ - gzip_min_length             1024;
+ - gzip_buffers                32 8k;
+ - gzip_types                  text/plain text/css application/json application/x-javascript text/xml application/xml application/rss+xml text/javascript image/tiff image/svg+xml application/psd application/x-font-woff application/x-font-ttf application/vnd.ms-fontobject;

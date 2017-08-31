@@ -1,5 +1,5 @@
 ---
-  - name: Add APT repository key
+  - name: Add APT repository key for Debian
     apt_key:
       url: "{{ nginx_apt_repository_key_url }}"
       state: present
@@ -8,7 +8,7 @@
       - nginx
       - nginx-repo
 
-  - name: Add APT repository address for Stable version Nginx
+  - name: Add APT repository address for Stable version Nginx for Debian
     apt_repository:
       repo: "deb {{ nginx_repository_address }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
       state: present
@@ -19,7 +19,7 @@
       - nginx
       - nginx-repo
 
-  - name: Add APT repository address for Mainline version Nginx
+  - name: Add APT repository address for Mainline version Nginx for Debian
     apt_repository:
       repo: "deb {{ nginx_repository_address }}/mainline/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
       state: present
@@ -30,7 +30,7 @@
       - nginx
       - nginx-repo
 
-  - name: Update packages list
+  - name: Update packages list for Debian
     apt: update_cache=yes
     when: nginx_stable.changed or nginx_mainline.changed and ansible_os_family == "Debian"
     tags:

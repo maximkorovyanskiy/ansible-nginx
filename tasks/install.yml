@@ -2,7 +2,7 @@
   - name: Install Nginx package
     package:
       name: "{{ item }}"
-      state: present
+      state: "{{ nginx_packages_state }}"
     with_items: '{{ nginx_packages }}'
     tags:
       - nginx
