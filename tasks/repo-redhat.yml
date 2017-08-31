@@ -1,0 +1,26 @@
+---
+  - name: Add Nginx official repository for Stable version Nginx
+    yum_repository:
+      name: nginx
+      description: Nginx official repository
+      file: nginx_repo
+      baseurl: "{{ nginx_repository_address }}/{% if ansible_distribution == 'CentOS' %}centos{% else %}rhel{% endif %}/{{ ansible_distribution_major_version }}/$basearch/"
+      gpgcheck: no
+      enabled: yes
+    when: nginx_version != 'mainline'
+    tags:
+      - nginx
+      - nginx-repo
+
+  - name: Add Nginx official repository for Mainline version Nginx
+    yum_repository:
+      name: nginx
+      description: Nginx official mainline repository
+      file: nginx_repo
+      baseurl: "{{ nginx_repository_address }}/{% if ansible_distribution == 'CentOS' %}centos{% else %}rhel{% endif %}/{{ ansible_distribution_major_version }}/$basearch/"
+      gpgcheck: no
+      enabled: yes
+    when: nginx_version == 'mainline'
+    tags:
+      - nginx
+      - nginx-repo

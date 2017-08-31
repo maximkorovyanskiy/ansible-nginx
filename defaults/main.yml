@@ -1,0 +1,4 @@
+nginx_repository_address: "http://nginx.org/packages"
+nginx_version: 'mainline'
+nginx_packages:
+  - nginx

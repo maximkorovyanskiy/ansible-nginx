@@ -1,0 +1,8 @@
+---
+  - include_vars: "{{ ansible_os_family | lower }}.yml"
+    tags:
+     - nginx
+     - nginx-install
+
+    - include: "repo-{{ ansible_os_family | lower }}.yml"
+    - include: "install.yml"
