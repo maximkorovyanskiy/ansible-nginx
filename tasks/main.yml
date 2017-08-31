@@ -4,5 +4,5 @@
      - nginx
      - nginx-install
 
-    - include: "repo-{{ ansible_os_family | lower }}.yml"
-    - include: "install.yml"
+  - include: "repo-{{ ansible_os_family | lower }}.yml"
+  - include: "install.yml"
