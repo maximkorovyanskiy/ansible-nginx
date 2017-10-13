@@ -12,7 +12,7 @@
     apt_repository:
       repo: "deb {{ nginx_repository_address }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
       state: present
-      filename: 'nginx'
+      filename: 'nginx-repo'
     when: ansible_os_family == "Debian" and nginx_version != 'mainline'
     register: nginx_stable
     tags:
@@ -23,7 +23,7 @@
     apt_repository:
       repo: "deb {{ nginx_repository_address }}/mainline/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx"
       state: present
-      filename: 'nginx'
+      filename: 'nginx-repo'
     when: ansible_os_family == "Debian" and nginx_version == 'mainline'
     register: nginx_mainline
     tags:
@@ -31,7 +31,8 @@
       - nginx-repo
 
   - name: Update packages list for Debian
-    apt: update_cache=yes
+    apt:
+      update_cache: yes
     when: nginx_stable.changed or nginx_mainline.changed and ansible_os_family == "Debian"
     tags:
       - nginx
