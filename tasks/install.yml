@@ -8,6 +8,17 @@
       - nginx
       - nginx-install
 
+  - name: Create vhost config dir /etc/nginx/conf.d
+    file:
+      dest: "{{ nginx_config_dir }}/conf.d"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    tags:
+      - nginx
+      - nginx-install
+
   - name: Make sure that the service Nginx is running
     service:
       name: nginx

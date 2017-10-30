@@ -7,7 +7,7 @@
       baseurl: "{{ nginx_repository_address }}/{% if ansible_distribution == 'CentOS' %}centos{% else %}rhel{% endif %}/{{ ansible_distribution_major_version }}/$basearch/"
       gpgcheck: no
       enabled: yes
-    when: nginx_version != 'mainline'
+    when: nginx_version == 'stable'
     tags:
       - nginx
       - nginx-repo
@@ -17,7 +17,7 @@
       name: nginx
       description: Nginx official mainline repository
       file: nginx_repo
-      baseurl: "{{ nginx_repository_address }}/{% if ansible_distribution == 'CentOS' %}centos{% else %}rhel{% endif %}/{{ ansible_distribution_major_version }}/$basearch/"
+      baseurl: "{{ nginx_repository_address }}/mainline/{% if ansible_distribution == 'CentOS' %}centos{% else %}rhel{% endif %}/{{ ansible_distribution_major_version }}/$basearch/"
       gpgcheck: no
       enabled: yes
     when: nginx_version == 'mainline'

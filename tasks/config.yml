@@ -1,13 +1,41 @@
 ---
-  - name: Import nginx.conf file
+  - name: Import {{ nginx_config_dir }}/nginx.conf
     template:
-       src: nginx.conf.j2
-       dest: "{{ nginx_config_dir }}/nginx.conf"
-       owner: root
-       group: root
-       mode: 0644
+      src: nginx.conf.j2
+      dest: "{{ nginx_config_dir }}/nginx.conf"
+      owner: root
+      group: root
+      mode: 0644
     notify:
       - restart nginx
+    tags:
+      - nginx
+      - nginx-config
+
+  - name: Import vhost config file
+    template:
+      src: "vhost/{{ item.template }}.j2"
+      dest: "{{ nginx_config_dir }}/conf.d/{{ item.hostname }}.conf"
+      owner: root
+      group: root
+      mode: 0644
+    with_items: "{{ nginx_vhost }}"
+    when: nginx_vhost is defined and item.template is defined and item.hostname is defined
+    notify:
+      - restart nginx
+    tags:
+      - nginx
+      - nginx-config
+
+  - name: Create vhost root dir
+    file:
+      dest: "{{ item.root }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+    with_items: "{{ nginx_vhost }}"
+    when: nginx_vhost is defined and item.root is defined
     tags:
       - nginx
       - nginx-config
