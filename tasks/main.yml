@@ -5,6 +5,9 @@
      - nginx-install
      - nginx-config
 
+  - name: Include OS tasks
   - include_tasks: "repo-{{ ansible_os_family | lower }}.yml"
+
   - import_tasks: "install.yml"
+
   - import_tasks: "config.yml"
