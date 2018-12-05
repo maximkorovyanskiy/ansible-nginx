@@ -8,8 +8,6 @@ galaxy_info:
     - name: Debian
     - name: Ubuntu
     - name: CentOS
-    
-dependencies: {}
 
 galaxy_tags:
   - nginx
