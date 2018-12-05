@@ -1,5 +1,5 @@
 # ansible-nginx
 
 # Role Variables
-Please see defaults/main.ym
-  specific OS variables see vars/os family
+Please see defaults/main.ym,
+Specific OS variables see vars/os_family
